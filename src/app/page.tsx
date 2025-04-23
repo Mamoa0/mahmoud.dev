@@ -11,7 +11,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { ChatbotReminder } from "@/components/ChatbotReminder";
 const Page = () => {
   return (
-    <ThemeProvider defaultTheme="light">
+    <ThemeProvider defaultTheme="system">
       <div className="min-h-screen bg-background overflow-x-hidden">
         <Navbar />
         <main className="w-full mx-auto">

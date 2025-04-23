@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AnimatedSkillCard from "@/components/AnimatedSkillCard";
 import {
   Code,
@@ -8,13 +8,13 @@ import {
   Globe,
   Users,
 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 type SkillCategory = {
   title: string;
   icon: React.ReactNode;
   skills: {
     name: string;
-    percentage: number;
     color: string;
   }[];
 };
@@ -24,93 +24,80 @@ const skillCategories: SkillCategory[] = [
     title: "Frontend Development",
     icon: <Code className="h-5 w-5" />,
     skills: [
-      { name: "React.js", percentage: 95, color: "bg-blue-600" },
-      { name: "Next.js", percentage: 95, color: "bg-sky-600" },
-      { name: "JavaScript / TypeScript (ES6+)", percentage: 90, color: "bg-yellow-500" },
-      { name: "HTML5", percentage: 95, color: "bg-orange-500" },
-      { name: "CSS3 / SCSS", percentage: 90, color: "bg-cyan-600" },
-      { name: "TailwindCSS", percentage: 95, color: "bg-teal-500" },
-      { name: "Bootstrap 5", percentage: 85, color: "bg-indigo-500" },
-      { name: "Material UI / Chakra UI / shadcn", percentage: 90, color: "bg-pink-500" },
-      { name: "Redux Toolkit / Zustand", percentage: 90, color: "bg-rose-500" },
-      { name: "Git / GitHub", percentage: 85, color: "bg-purple-600" },
+      { name: "React.js", color: "from-blue-600/20 to-blue-600/40" },
+      { name: "Next.js", color: "from-sky-600/20 to-sky-600/40" },
+      { name: "JavaScript / TypeScript", color: "from-yellow-500/20 to-yellow-500/40" },
+      { name: "HTML5", color: "from-orange-500/20 to-orange-500/40" },
+      { name: "CSS3 / SCSS", color: "from-cyan-600/20 to-cyan-600/40" },
+      { name: "TailwindCSS", color: "from-teal-500/20 to-teal-500/40" },
+      { name: "Bootstrap 5", color: "from-indigo-500/20 to-indigo-500/40" },
+      { name: "Material UI / Chakra UI / shadcn", color: "from-pink-500/20 to-pink-500/40" },
+      { name: "Redux Toolkit / Zustand", color: "from-rose-500/20 to-rose-500/40" },
+      { name: "Git / GitHub", color: "from-purple-600/20 to-purple-600/40" },
     ],
-  }
-  ,
+  },
   {
     title: "UI/UX & Design",
     icon: <Palette className="h-5 w-5" />,
     skills: [
-      { name: "Material UI", percentage: 90, color: "bg-teal-500" },
-      { name: "Chakra UI", percentage: 85, color: "bg-pink-500" },
-      { name: "Framer Motion", percentage: 80, color: "bg-purple-600" },
-      {
-        name: "Responsive design principles",
-        percentage: 85,
-        color: "bg-pink-600",
-      },
-      { name: "UI component libraries", percentage: 95, color: "bg-green-500" },
+      { name: "Material UI", color: "from-teal-500/20 to-teal-500/40" },
+      { name: "Chakra UI", color: "from-pink-500/20 to-pink-500/40" },
+      { name: "Framer Motion", color: "from-purple-600/20 to-purple-600/40" },
+      { name: "Responsive Design Principles", color: "from-pink-600/20 to-pink-600/40" },
+      { name: "UI Component Libraries", color: "from-green-500/20 to-green-500/40" },
     ],
   },
   {
     title: "Mobile Development",
     icon: <Smartphone className="h-5 w-5" />,
     skills: [
-      { name: "React Native", percentage: 75, color: "bg-blue-600" },
-      { name: "Native Modules", percentage: 75, color: "bg-blue-700" },
-      { name: "Expo", percentage: 75, color: "bg-gray-700" },
-      { name: "Firebase", percentage: 80, color: "bg-yellow-600" },
+      { name: "React Native", color: "from-blue-600/20 to-blue-600/40" },
+      { name: "Native Modules", color: "from-blue-700/20 to-blue-700/40" },
+      { name: "Expo", color: "from-gray-700/20 to-gray-700/40" },
+      { name: "Firebase", color: "from-yellow-600/20 to-yellow-600/40" },
     ],
   },
   {
     title: "Backend Knowledge",
     icon: <Database className="h-5 w-5" />,
     skills: [
-      { name: "Node.js", percentage: 85, color: "bg-green-600" },
-      { name: "Express.js", percentage: 80, color: "bg-gray-600" },
-      { name: "Firebase", percentage: 70, color: "bg-yellow-600" },
-      { name: "GraphQL", percentage: 60, color: "bg-pink-700" },
-      { name: "RESTful APIs", percentage: 90, color: "bg-blue-700" },
-      { name: "MongoDB", percentage: 85, color: "bg-green-700" },
-      { name: "MySQL", percentage: 70, color: "bg-indigo-600" },
-      { name: "Sequelize ORM", percentage: 70, color: "bg-purple-600" },
-      { name: "Mongoose ODM", percentage: 80, color: "bg-teal-600" },
+      { name: "Node.js", color: "from-green-600/20 to-green-600/40" },
+      { name: "Express.js", color: "from-gray-600/20 to-gray-600/40" },
+      { name: "Firebase", color: "from-yellow-600/20 to-yellow-600/40" },
+      { name: "GraphQL", color: "from-pink-700/20 to-pink-700/40" },
+      { name: "RESTful APIs", color: "from-blue-700/20 to-blue-700/40" },
+      { name: "MongoDB", color: "from-green-700/20 to-green-700/40" },
+      { name: "MySQL", color: "from-indigo-600/20 to-indigo-600/40" },
+      { name: "Sequelize ORM", color: "from-purple-600/20 to-purple-600/40" },
+      { name: "Mongoose ODM", color: "from-teal-600/20 to-teal-600/40" },
     ],
   },
   {
     title: "Soft Skills",
-    icon: <Users className="h-5 w-5" />, 
+    icon: <Users className="h-5 w-5" />,
     skills: [
-      { name: "Communication", percentage: 90, color: "bg-blue-600" },
-      { name: "Problem Solving", percentage: 85, color: "bg-green-600" },
-      { name: "Teamwork", percentage: 88, color: "bg-purple-600" },
-      { name: "Adaptability", percentage: 80, color: "bg-orange-600" },
-      { name: "Time Management", percentage: 75, color: "bg-yellow-600" },
-      { name: "Self-Learning", percentage: 95, color: "bg-teal-600" },
-      { name: "Working Under Pressure", percentage: 85, color: "bg-red-600" },
+      { name: "Communication", color: "from-blue-600/20 to-blue-600/40" },
+      { name: "Problem Solving", color: "from-green-600/20 to-green-600/40" },
+      { name: "Teamwork", color: "from-purple-600/20 to-purple-600/40" },
+      { name: "Adaptability", color: "from-orange-600/20 to-orange-600/40" },
+      { name: "Time Management", color: "from-yellow-600/20 to-yellow-600/40" },
+      { name: "Self-Learning", color: "from-teal-600/20 to-teal-600/40" },
+      { name: "Working Under Pressure", color: "from-red-600/20 to-red-600/40" },
     ],
   },
-  
   {
     title: "Other Skills",
     icon: <Globe className="h-5 w-5" />,
     skills: [
-      { name: "Testing", percentage: 60, color: "bg-red-600" },
-      {
-        name: "Performance Optimization",
-        percentage: 75,
-        color: "bg-yellow-600",
-      },
-      { name: "PWAs", percentage: 60, color: "bg-blue-500" },
-      { name: "Accessibility", percentage: 70, color: "bg-green-600" },
+      { name: "Testing", color: "from-red-600/20 to-red-600/40" },
+      { name: "Performance Optimization", color: "from-yellow-600/20 to-yellow-600/40" },
+      { name: "Accessibility", color: "from-green-600/20 to-green-600/40" },
     ],
   },
 ];
 
+
 const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState<string>(
-    "Frontend Development"
-  );
 
   return (
     <section id="skills" className="py-20 relative">
@@ -132,38 +119,39 @@ const SkillsSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {skillCategories.map((category) => (
-            <button
-              key={category.title}
-              onClick={() => setActiveCategory(category.title)}
-              className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-300 ${
-                activeCategory === category.title
-                  ? "bg-gradient-to-r from-purple-600 to-teal-500 text-white shadow-lg"
-                  : "bg-secondary/50 hover:bg-secondary text-foreground"
-              }`}
-            >
-              {category.icon}
-              <span>{category.title}</span>
-            </button>
-          ))}
-        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories
-            .find((category) => category.title === activeCategory)
-            ?.skills.map((skill) => (
-              <AnimatedSkillCard
-                key={skill.name}
-                icon={
-                  skillCategories.find((c) => c.title === activeCategory)?.icon
-                }
-                title={skill.name}
-                percentage={skill.percentage}
-                color={skill.color}
-              />
+
+        <Tabs defaultValue="Frontend Development" className="w-full">
+          <TabsList className="flex flex-wrap justify-center gap-2 mb-8 bg-transparent">
+            {skillCategories.map((category) => (
+              <TabsTrigger
+                key={category.title}
+                value={category.title}
+                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-teal-500 data-[state=active]:text-white"
+              >
+                <div className="flex items-center gap-2">
+                  {category.icon}
+                  <span>{category.title}</span>
+                </div>
+              </TabsTrigger>
             ))}
-        </div>
+          </TabsList>
+
+          {skillCategories.map((category) => (
+            <TabsContent key={category.title} value={category.title}>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:mt-6 mt-12">
+                {category.skills.map((skill) => (
+                  <AnimatedSkillCard
+                    key={skill.name}
+                    icon={category.icon}
+                    title={skill.name}
+                    color={skill.color}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
     </section>
   );
