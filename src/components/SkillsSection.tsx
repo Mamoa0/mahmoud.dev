@@ -122,7 +122,7 @@ const SkillsSection = () => {
 
 
         <Tabs defaultValue="Frontend Development" className="w-full">
-          <TabsList className="flex flex-wrap justify-center gap-2 mb-8 bg-transparent">
+          <TabsList className="flex h-auto flex-wrap justify-center gap-2 mb-8 bg-transparent">
             {skillCategories.map((category) => (
               <TabsTrigger
                 key={category.title}
@@ -139,7 +139,7 @@ const SkillsSection = () => {
 
           {skillCategories.map((category) => (
             <TabsContent key={category.title} value={category.title}>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:mt-6 mt-12">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                 {category.skills.map((skill) => (
                   <AnimatedSkillCard
                     key={skill.name}
