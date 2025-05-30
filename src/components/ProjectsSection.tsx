@@ -42,6 +42,23 @@ const ProjectsSection = () => {
         "https://play.google.com/store/apps/details?id=com.xtend.newgoat",
     },
     {
+      id: 345,
+      title: "Skyline Digital Solutions",
+      description:
+        "A professional website for a Germany-based digital agency offering custom web development, modern UI design, backend solutions, and email integration. Built to showcase their services and enhance client engagement with a sleek, responsive interface.",
+      image: "/placeholder.svg",
+      tags: [
+        "Next.js",
+        "Tailwind CSS",
+        "Shadcn",
+        "Web Hosting",
+        "Hostinger",
+        "Email Integration",
+      ],
+      category: ["Web"],
+      liveUrl: "https://skylinedigitalsolution.de/",
+    },
+    {
       id: 2,
       title: "Idify Dashboard",
       description:
@@ -50,6 +67,7 @@ const ProjectsSection = () => {
       tags: ["Next.js", "Firebase", "Tiptap", "Chart.js", "Redux", "Shadcn"],
       category: ["Web"],
     },
+
     {
       id: 65,
       title: "Valuefinx",
