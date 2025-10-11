@@ -23,6 +23,26 @@ const ProjectsSection = () => {
   const projects: Project[] = [
     {
       id: 1,
+      title: "GPA - Education Platform",
+      description:
+        "a modern e-learning platform focused on school curricula in Egypt, Saudi Arabia, and the UAE. It offers structured courses by grade and subject like Math for Grade 12 featuring interactive lessons, video sessions, and progress tracking for both students and teachers.",
+      image: "/placeholder.svg",
+      tags: ["Next.js", "Supabase", "Zustand", "Shadcn"],
+      category: ["Web"],
+      liveUrl:"https://gpa-platform.com"
+    },
+    {
+      id: 1,
+      title: "GPA - Education Mobile App",
+      description:
+        "GPA Mobile App is the student’s all-in-one learning companion. It offers fast and secure access to school courses across Egypt, Saudi Arabia, and the UAE. With HLS video streaming for smooth playback and advanced screen protection to prevent recording, the app ensures a safe, seamless study experience anytime, anywhere.",
+      image: "/placeholder.svg",
+      tags: ["React Native", "Supabase", "Zustand", "Tailwind CSS", "Expo"],
+      category: ["Mobile"],
+      liveUrl:"https://play.google.com/store/apps/details?id=com.gpaedu.app"
+    },
+    {
+      id: 1,
       title: "New Goat Dashboard - Football Tryouts & Social Media Management",
       description:
         "A comprehensive dashboard application that bridges football clubs and players, offering tools for managing campaigns, analyzing player performance, and controlling the football social media platform.",
@@ -41,23 +61,6 @@ const ProjectsSection = () => {
       liveUrl:
         "https://play.google.com/store/apps/details?id=com.xtend.newgoat",
     },
-    // {
-    //   id: 345,
-    //   title: "Skyline Digital Solutions",
-    //   description:
-    //     "A professional website for a Germany-based digital agency offering custom web development, modern UI design, backend solutions, and email integration. Built to showcase their services and enhance client engagement with a sleek, responsive interface.",
-    //   image: "/placeholder.svg",
-    //   tags: [
-    //     "Next.js",
-    //     "Tailwind CSS",
-    //     "Shadcn",
-    //     "Web Hosting",
-    //     "Hostinger",
-    //     "Email Integration",
-    //   ],
-    //   category: ["Web"],
-    //   liveUrl: "https://skylinedigitalsolution.de/",
-    // },
     {
       id: 2,
       title: "Idify Dashboard",
@@ -205,13 +208,13 @@ const ProjectsSection = () => {
       : projects.filter((project) => project.category.includes(filter));
 
   return (
-    <section id="projects" className="py-20 relative">
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <section id="projects" className="relative py-20">
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-3xl bg-teal-500/10"></div>
+      <div className="absolute -right-40 -bottom-40 w-96 h-96 rounded-full blur-3xl bg-purple-500/10"></div>
 
       <div className="container px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             <span className="gradient-text">Featured Projects</span>
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -220,7 +223,7 @@ const ProjectsSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-wrap gap-2 justify-center mb-12">
           {categories.map((category) => (
             <Button
               key={category}
@@ -233,20 +236,20 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project) => (
             <Card
               key={project.id}
-              className="project-card overflow-hidden border-border flex flex-col relative z-20"
+              className="flex overflow-hidden relative z-20 flex-col project-card border-border"
             >
-              <div className="relative overflow-hidden h-48">
+              <div className="overflow-hidden relative h-48">
                 {project.liveUrl ? (
                   <Image
                     src={`https://api.microlink.io/?url=${encodeURIComponent(
                       project.liveUrl
                     )}&screenshot=true&meta=false&embed=screenshot.url`}
                     alt={project.title}
-                    className="project-image w-full h-full object-cover"
+                    className="object-cover w-full h-full project-image"
                     width={240}
                     height={192}
                   />
@@ -254,7 +257,7 @@ const ProjectsSection = () => {
                   <Image
                     src={project.image}
                     alt={project.title}
-                    className=" w-full h-full object-contain"
+                    className="object-contain w-full h-full"
                     width={240}
                     height={192}
                   />
@@ -262,8 +265,8 @@ const ProjectsSection = () => {
               </div>
               <CardContent className="p-6">
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">
+                  <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
+                  <p className="mb-4 text-muted-foreground">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -279,7 +282,7 @@ const ProjectsSection = () => {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="flex justify-between px-6 pb-6 pt-0 mt-auto">
+              <CardFooter className="flex justify-between px-6 pt-0 pb-6 mt-auto">
                 {project.liveUrl && (
                   <Button variant="outline" size="sm" asChild>
                     <a
